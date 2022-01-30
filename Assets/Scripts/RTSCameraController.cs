@@ -9,9 +9,11 @@ namespace PyramidGamesTest
     { 
         private Controls controls;
 
-        [Header("To link")]
+        [Header("To Link")]
         [SerializeField]
         private new Camera camera;
+        [SerializeField]
+        private PositionConstraints positionConstraints;
 
         [Header("Settings")]
         [SerializeField]
@@ -21,11 +23,9 @@ namespace PyramidGamesTest
         [SerializeField]
         private float cameraDistance;
 
-
         [Header("States")]
         [Range(0,90f)]
         public float pitchAngle;
-
 
         [SerializeField]
         private Vector3 moveDirection;
@@ -61,6 +61,8 @@ namespace PyramidGamesTest
                 yawDirection * rotateSpeed * Time.deltaTime, Vector3.up);
             transform.position += moveSpeed * Time.deltaTime * transform.forward * moveDirection.y;
             transform.position += moveSpeed * Time.deltaTime * transform.right * moveDirection.x;
+            if (positionConstraints != null)
+                transform.position = positionConstraints.GetLimitedPosition(transform.position);
         }
 
         private void RefreshAngle()
@@ -83,7 +85,6 @@ namespace PyramidGamesTest
         {
             RefreshAngle();
         }
-
 #endif
     }
 }
