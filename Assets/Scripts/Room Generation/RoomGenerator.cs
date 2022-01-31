@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace PyramidGamesTest.RoomGeneration
 {
-
-
-
     [RequireComponent(typeof(RoomData))]
     public class RoomGenerator : MonoBehaviour
     {
@@ -14,6 +12,13 @@ namespace PyramidGamesTest.RoomGeneration
         [Header("To Link")]
         public OnWallGenerator doorGenerator;
         public WallGenerator wallGenerator;
+
+        public void Regenerate()
+        {
+            Clear();
+            GenerateRoom();
+        }
+
         public ObjectGenerator chestGenerator;
 
         public Transform floor;
@@ -41,6 +46,14 @@ namespace PyramidGamesTest.RoomGeneration
             chestGenerator.Generate();
         }
 
+        public void Clear()
+        {
+            doorGenerator.Clear();
+            wallGenerator.Clear();
+            chestGenerator.Clear();
+        }
+
+
         private void ResizeFloor()
         {
             if (floor != null)
@@ -54,6 +67,7 @@ namespace PyramidGamesTest.RoomGeneration
             if (generateRoom)
             {
                 generateRoom = false;
+                Clear();
                 GenerateRoom();
             }
         }

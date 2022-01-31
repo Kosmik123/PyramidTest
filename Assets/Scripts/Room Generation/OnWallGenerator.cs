@@ -50,6 +50,14 @@ namespace PyramidGamesTest.RoomGeneration
             throw new CantGenerateOnWallException();
         }
 
+        public void Clear()
+        {
+            var allChildren = GetComponentsInChildren<Transform>();
+            foreach (var child in allChildren)
+                if(child.parent == transform)
+                    Destroy(child.gameObject);
+        }
+
         private bool IsTooCloseToOtherPositions(WallPosition roomPosition, List<WallPosition> positionsSoFar)
         {
             foreach (var other in positionsSoFar)

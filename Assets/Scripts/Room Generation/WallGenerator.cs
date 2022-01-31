@@ -46,6 +46,14 @@ namespace PyramidGamesTest.RoomGeneration
             }
         }
 
+        public void Clear()
+        {
+            var allChildren = GetComponentsInChildren<Transform>();
+            foreach (var child in allChildren)
+                if (child.parent == transform)
+                    Destroy(child.gameObject);
+        }
+
         private static List<WallPosition>[] CreateListsOfHoles(WallPosition[] holePositions)
         {
             List<WallPosition>[] holePositionsByWallIndex = new List<WallPosition>[4];

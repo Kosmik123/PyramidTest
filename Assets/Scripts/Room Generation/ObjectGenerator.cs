@@ -32,5 +32,13 @@ namespace PyramidGamesTest.RoomGeneration
             obj.transform.localPosition = new Vector3(randomX, 0, randomY);
             obj.transform.localRotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
         }
+
+        public void Clear()
+        {
+            var allChildren = GetComponentsInChildren<Transform>();
+            foreach (var child in allChildren)
+                if (child.parent == transform)
+                    Destroy(child.gameObject);
+        }
     }
 }
