@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace PyramidGamesTest.RoomGeneration
 {
+
+
+
+
     [RequireComponent(typeof(RoomData))]
     public class RoomGenerator : MonoBehaviour
     {
@@ -13,6 +17,7 @@ namespace PyramidGamesTest.RoomGeneration
 
         [Header("To Link")]
         public OnWallGenerator doorGenerator;
+        public WallGenerator wallGenerator;
         public Transform floor;
 
         [Header("States")]
@@ -33,9 +38,8 @@ namespace PyramidGamesTest.RoomGeneration
             // intantiate doors
             doorGenerator.InstantiateObjects(doorPositions);
 
-
-            // fill ther rest with walls
-            GenerateWalls(doorPositions, doorGenerator.objectsWidth);
+            // fill the rest with walls
+            wallGenerator.GenerateWalls(doorPositions, doorGenerator.objectsSize);
 
             // tile wall textures correctly
 
@@ -46,22 +50,6 @@ namespace PyramidGamesTest.RoomGeneration
         {
             if (floor != null)
                 floor.localScale = new Vector3(room.size.x, 1, room.size.y);
-        }
-
-        private void CreateWall()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                float wallDist = room.GetRoomExtent(i);
-            }
-            GameObject.CreatePrimitive(PrimitiveType.Quad);
-        }
-
-
-
-        private void GenerateWalls(WallPosition[] holePositions, float holeWidth)
-        {
-
         }
 
 

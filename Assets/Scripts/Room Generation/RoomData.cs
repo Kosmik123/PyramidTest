@@ -12,5 +12,9 @@ namespace PyramidGamesTest.RoomGeneration
             return 0.5f * (wallIndex % 2 == 0 ? size.y : size.x);
         }
 
+        public float GetRoomSize(int wallIndex)
+        {
+            return (wallIndex % 2 == 0 ? size.x : size.y);
+        }
     }
 }

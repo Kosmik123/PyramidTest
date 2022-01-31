@@ -14,11 +14,11 @@ namespace PyramidGamesTest.RoomGeneration
         public RoomData room;
 
         [Header("Prefabs")]
-        public GameObject intantiatedObjectPrefab;
+        public GameObject objectPrefab;
 
         [Header("Settings")]
         public int objectsCount;
-        public float objectsWidth;
+        public Vector2 objectsSize;
 
         public WallPosition[] GetRandomWallPositions(int count)
         {
@@ -37,8 +37,8 @@ namespace PyramidGamesTest.RoomGeneration
 
                 float wallSize = wallIndex % 2 == 0 ? room.size.x : room.size.y;
                 float position = Random.Range(
-                    -0.5f * (wallSize - objectsWidth), 
-                    +0.5f * (wallSize - objectsWidth));
+                    -0.5f * (wallSize - objectsSize.x), 
+                    +0.5f * (wallSize - objectsSize.x));
 
                 var roomPosition = new WallPosition(wallIndex, position);
 
@@ -53,7 +53,7 @@ namespace PyramidGamesTest.RoomGeneration
         private bool IsTooCloseToOtherPositions(WallPosition roomPosition, List<WallPosition> positionsSoFar)
         {
             foreach (var other in positionsSoFar)
-                if (roomPosition.IsTooClose(other, objectsWidth))
+                if (roomPosition.IsTooClose(other, objectsSize.x))
                     return true;
 
             return false;
@@ -65,14 +65,14 @@ namespace PyramidGamesTest.RoomGeneration
             foreach (var position in positions)
             {
                 var obj = IntantiateObject(position);
-                obj.name = $"{intantiatedObjectPrefab.name} {index}";
+                obj.name = $"{objectPrefab.name} {index}";
                 index++;
             }
         }
 
         private GameObject IntantiateObject(WallPosition position)
         {
-            var obj = Instantiate(intantiatedObjectPrefab, transform);
+            var obj = Instantiate(objectPrefab, transform);
             float wallDist = room.GetRoomExtent(position.wallIndex);
             Vector3 unrotatedPosition = new Vector3(position.distanceFromCenter, 0, wallDist);
             Quaternion rotation = Quaternion.AngleAxis(position.wallIndex * 90, Vector3.up);

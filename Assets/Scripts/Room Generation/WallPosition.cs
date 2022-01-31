@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace PyramidGamesTest.RoomGeneration
 {
@@ -25,5 +26,15 @@ namespace PyramidGamesTest.RoomGeneration
 
             return true;
         }
+
+        public class DistanceComparer : IComparer<WallPosition>
+        {
+            public int Compare(WallPosition a, WallPosition b)
+            {
+                return a.distanceFromCenter.CompareTo(b.distanceFromCenter);
+            }
+        }
+
+
     }
 }
