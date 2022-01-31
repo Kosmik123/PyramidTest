@@ -18,6 +18,7 @@ namespace PyramidGamesTest
         [Header("States")]        
         public bool isCounting;
         public float currentPlaytime;
+        public bool hasKey;
 
         private void Awake()
         {
@@ -26,10 +27,10 @@ namespace PyramidGamesTest
 
         public void RestartGame()
         {
+            hasKey = false;
             currentPlaytime = 0;
             OnGameStarted?.Invoke();
             isCounting = true;
-            
         }
 
 
@@ -40,6 +41,11 @@ namespace PyramidGamesTest
                 currentPlaytime += Time.deltaTime;
                 OnPlaytimeChanged?.Invoke(currentPlaytime);
             }
+        }
+
+        public void ObtainKey()
+        {
+            hasKey = true;
         }
 
         public void Finish()

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 3710796625385637409}
-  objectPrefab: {fileID: 1569248554329192775, guid: e92c17e7d3a2a324da2468827d448b26,
+  objectPrefab: {fileID: 3302329352380363886, guid: 9348d4d2841691045af00db24b3b6da5,
     type: 3}
   objectCount: 1
   minimalDistanceFromWalls: 0.5
@@ -95,6 +95,7 @@ MonoBehaviour:
   structureType: 1
   wallHeight: 2
   wallThicknes: 0.1
+  wallMaterial: {fileID: 0}
 --- !u!1 &5025983261556187548
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +161,6 @@ MonoBehaviour:
   wallGenerator: {fileID: 4900806585574806355}
   chestGenerator: {fileID: 8568044059241654531}
   floor: {fileID: 4959121572484989170}
-  generateRoom: 0
 --- !u!1 &5457962262870994638
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 3710796625385637409}
-  objectPrefab: {fileID: 1570266275981612153, guid: 0d24b6cf34aa64b42870af2deee4ad26,
+  objectPrefab: {fileID: 8496568508614729807, guid: 86f9759ff51159f4a844cf777273c1be,
     type: 3}
   objectsCount: 2
   objectsSize: {x: 0.6, y: 1.06}

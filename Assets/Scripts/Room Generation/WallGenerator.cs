@@ -32,6 +32,7 @@ namespace PyramidGamesTest.RoomGeneration
         public StructureType structureType;
         public float wallHeight;
         public float wallThicknes;
+        public Material wallMaterial;
 
         public void GenerateWalls(WallPosition[] holePositions, Vector2 holeSize)
         {
@@ -133,6 +134,8 @@ namespace PyramidGamesTest.RoomGeneration
             PrimitiveType type = structureType == StructureType.Cube ? PrimitiveType.Cube : PrimitiveType.Quad;
             var obj = GameObject.CreatePrimitive(type);
             obj.transform.parent = transform;
+
+            // obj.GetComponent<MeshRenderer>().material = wallMaterial;
 
             return obj.transform;
         }
