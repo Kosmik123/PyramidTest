@@ -6,6 +6,12 @@ namespace PyramidGamesTest.UI
 {
     public class UIManager : MonoBehaviour
     {
+        public static UIManager instance;
+
+        [Header("Prefabs")]
+        public GameObject messageWindowPrefab;
+        public GameObject yesNoWindowPrefab;
+
         [Header("Screens")]
         public Canvas menuScreen;
         public Canvas gameScreen;
@@ -13,12 +19,18 @@ namespace PyramidGamesTest.UI
 
         [Header("To Link")]
         public TMP_Text timeIndicator;
+        public Canvas windowsContainer;
+
+        private void Awake()
+        {
+            instance = Singleton.MakeInstance(this, instance);
+        }
+
 
         private void OnEnable()
         {
             GameManager.OnPlaytimeChanged += RefreshTimer;
         }
-
 
         public void ChangeScreen (Canvas newScreen)
         {
@@ -44,10 +56,12 @@ namespace PyramidGamesTest.UI
 
         }
 
-
-
-
-
+        public void ShowMessageWindow(string message)
+        {
+            var obj = Instantiate(messageWindowPrefab, windowsContainer.transform);
+            MessageWindow window = obj.GetComponent<MessageWindow>();
+            window.Message = message;
+        }
 
 
         private void OnDisable()
