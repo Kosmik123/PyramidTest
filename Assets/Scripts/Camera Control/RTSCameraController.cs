@@ -36,9 +36,7 @@ namespace PyramidGamesTest.CameraControl
 
 
         [Header("States")]
-        [SerializeField]
         private Vector3 moveDirection;
-        [SerializeField]
         private float yawDirection;
 
         private void Awake()

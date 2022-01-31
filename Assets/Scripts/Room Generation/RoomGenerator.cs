@@ -12,6 +12,9 @@ namespace PyramidGamesTest.RoomGeneration
         [Header("To Link")]
         public OnWallGenerator doorGenerator;
         public WallGenerator wallGenerator;
+        public ObjectGenerator chestGenerator;
+        
+        public Transform floor;
 
         public void Regenerate()
         {
@@ -19,26 +22,21 @@ namespace PyramidGamesTest.RoomGeneration
             GenerateRoom();
         }
 
-        public ObjectGenerator chestGenerator;
-
-        public Transform floor;
-
-        [Header("States")]
-        public bool generateRoom;
-
         private void Awake()
         {
             room = GetComponent<RoomData>();
+        }
+
+        private void OnEnable()
+        {
+            GameManager.OnGameStarted += Regenerate;
         }
 
         public void GenerateRoom()
         {
             ResizeFloor();
 
-            // decide door positions
             var doorPositions = doorGenerator.GetRandomWallPositions(doorGenerator.objectsCount);
-
-            // intantiate doors
             doorGenerator.InstantiateObjects(doorPositions);
 
             wallGenerator.GenerateWalls(doorPositions, doorGenerator.objectsSize);
@@ -61,15 +59,11 @@ namespace PyramidGamesTest.RoomGeneration
         }
 
 
-
-        private void OnValidate()
+        private void OnDisable()
         {
-            if (generateRoom)
-            {
-                generateRoom = false;
-                Clear();
-                GenerateRoom();
-            }
+            GameManager.OnGameStarted -= Regenerate;
         }
+
+
     }
 }
