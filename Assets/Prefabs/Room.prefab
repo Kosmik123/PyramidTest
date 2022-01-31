@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1736146751158355977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4724706284686338680}
+  - component: {fileID: 8568044059241654531}
+  m_Layer: 0
+  m_Name: Chest Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4724706284686338680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736146751158355977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5025983261556187550}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8568044059241654531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736146751158355977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad7df461ffded542bf4167572e23275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room: {fileID: 3710796625385637409}
+  objectPrefab: {fileID: 1569248554329192775, guid: e92c17e7d3a2a324da2468827d448b26,
+    type: 3}
+  objectCount: 1
+  minimalDistanceFromWalls: 0.5
 --- !u!1 &3926019726141372613
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +126,7 @@ Transform:
   m_Children:
   - {fileID: 1512914776923351467}
   - {fileID: 405516654848090689}
+  - {fileID: 4724706284686338680}
   - {fileID: 4959121572484989170}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128b658497e0a242af8e2d01be5368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestPrefab: {fileID: 0}
   doorGenerator: {fileID: 8280716001520798745}
   wallGenerator: {fileID: 4900806585574806355}
+  chestGenerator: {fileID: 8568044059241654531}
   floor: {fileID: 4959121572484989170}
   generateRoom: 0
 --- !u!1 &5457962262870994638
@@ -205,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 332395164947037562, guid: cc665f16c23306c4f868df9a572a6c04,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 332395164947037562, guid: cc665f16c23306c4f868df9a572a6c04,
         type: 3}
