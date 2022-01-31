@@ -23,10 +23,19 @@ namespace PyramidGamesTest.CameraControl
         [SerializeField]
         private float cameraDistance;
 
-        [Header("States")]
-        [Range(0,90f)]
-        public float pitchAngle;
+        [Range(0,90f)] [SerializeField]
+        private float _pitchAngle;
+        public float PitchAngle
+        {
+            get => _pitchAngle;
+            set {
+                _pitchAngle = value;
+                RefreshAngle();
+            }
+        }
 
+
+        [Header("States")]
         [SerializeField]
         private Vector3 moveDirection;
         [SerializeField]
@@ -70,7 +79,7 @@ namespace PyramidGamesTest.CameraControl
             if (camera == null)
                 return;
 
-            Quaternion pitch = Quaternion.AngleAxis(pitchAngle, Vector3.right);
+            Quaternion pitch = Quaternion.AngleAxis(_pitchAngle, Vector3.right);
             camera.transform.localRotation = pitch;
             camera.transform.localPosition = pitch * Vector3.back * cameraDistance;
         }

@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 2625429223094295617}
   - component: {fileID: 2625429223094295618}
   - component: {fileID: 2625429223094295619}
+  - component: {fileID: 5380008105185933253}
   m_Layer: 0
   m_Name: RTS Camera
   m_TagString: Untagged
@@ -200,3 +201,16 @@ MonoBehaviour:
   _pitchAngle: 50
   moveDirection: {x: 0, y: 0, z: 0}
   yawDirection: 0
+--- !u!114 &5380008105185933253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625429223094295628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5023ccd8163ba4c4bb2c720fbfec1ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 2625429223094295619}

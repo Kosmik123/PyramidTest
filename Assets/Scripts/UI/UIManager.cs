@@ -16,7 +16,7 @@ namespace PyramidGamesTest.UI
 
         private void OnEnable()
         {
-            GameManager.OnPlaytimeChange += RefreshTimer;
+            GameManager.OnPlaytimeChanged += RefreshTimer;
         }
 
 
@@ -52,7 +52,7 @@ namespace PyramidGamesTest.UI
 
         private void OnDisable()
         {
-            GameManager.OnPlaytimeChange -= RefreshTimer;
+            GameManager.OnPlaytimeChanged -= RefreshTimer;
         }
 
     }
