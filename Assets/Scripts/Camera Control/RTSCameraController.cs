@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PyramidGamesTest
+namespace PyramidGamesTest.CameraControl
 {
     public class RTSCameraController : MonoBehaviour
     { 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PyramidGamesTest
+namespace PyramidGamesTest.CameraControl
 {
     public class PositionConstraints : MonoBehaviour
     {
