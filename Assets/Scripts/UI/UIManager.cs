@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ namespace PyramidGamesTest.UI
         [Header("To Link")]
         public TMP_Text timeIndicator;
         public Canvas windowsContainer;
+        public Image windowsContainerPanel;
 
         private void Awake()
         {
@@ -30,6 +32,12 @@ namespace PyramidGamesTest.UI
         private void OnEnable()
         {
             GameManager.OnPlaytimeChanged += RefreshTimer;
+            GameManager.OnGameFinished += ShowGameover;
+        }
+
+        private void ShowGameover()
+        {
+            ChangeScreen(gameoverScreen);
         }
 
         public void ChangeScreen (Canvas newScreen)
@@ -56,6 +64,8 @@ namespace PyramidGamesTest.UI
 
         }
 
+
+
         public void ShowMessageWindow(string message)
         {
             var obj = Instantiate(messageWindowPrefab, windowsContainer.transform);
@@ -63,6 +73,9 @@ namespace PyramidGamesTest.UI
             window.Message = message;
         }
 
+        public void RefreshWindowsContainer()
+        {
+        }
 
         private void OnDisable()
         {

@@ -10,10 +10,14 @@ namespace PyramidGamesTest.Interactions
         [SerializeField]
         private string cantOpenText;
 
-
+        [Header("States")]
+        public bool isOpen;
 
         public void Open()
         {
+            if (isOpen)
+                return;
+
             if (GameManager.instance.hasKey)
                 OpenSuccessfully();
             else
@@ -22,7 +26,15 @@ namespace PyramidGamesTest.Interactions
 
         private void OpenSuccessfully()
         {
-
+            isOpen = true;
+            GameManager.instance.hasKey = false;
+            GetComponent<Animator>().SetTrigger("Open");
         }
+
+        public void Win()
+        {
+            GameManager.instance.Finish();
+        }
+
     }
 }
