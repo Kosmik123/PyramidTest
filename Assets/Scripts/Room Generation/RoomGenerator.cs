@@ -6,18 +6,16 @@ namespace PyramidGamesTest.RoomGeneration
 
 
 
-
     [RequireComponent(typeof(RoomData))]
     public class RoomGenerator : MonoBehaviour
     {
         private RoomData room;
 
-        [Header("Prefabs")]
-        public GameObject chestPrefab;
-
         [Header("To Link")]
         public OnWallGenerator doorGenerator;
         public WallGenerator wallGenerator;
+        public ObjectGenerator chestGenerator;
+
         public Transform floor;
 
         [Header("States")]
@@ -38,12 +36,9 @@ namespace PyramidGamesTest.RoomGeneration
             // intantiate doors
             doorGenerator.InstantiateObjects(doorPositions);
 
-            // fill the rest with walls
             wallGenerator.GenerateWalls(doorPositions, doorGenerator.objectsSize);
 
-            // tile wall textures correctly
-
-            // instantiate chest
+            chestGenerator.Generate();
         }
 
         private void ResizeFloor()
