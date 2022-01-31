@@ -34,7 +34,7 @@ namespace PyramidGamesTest
 
         private void Awake()
         {
-            controls = new Controls();    
+            controls = new Controls();   
         }
 
         private void OnEnable()
