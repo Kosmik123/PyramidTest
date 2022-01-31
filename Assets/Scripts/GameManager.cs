@@ -5,8 +5,11 @@ namespace PyramidGamesTest
 {
     public class GameManager : MonoBehaviour
     {
+        private string savepath;
+
         public static GameManager instance;
 
+        public static event Action OnApplicationLoaded;
         public static event Action OnGameStarted;
         public static event Action<float> OnPlaytimeChanged;
         public static event Action OnGameFinished;
@@ -21,11 +24,20 @@ namespace PyramidGamesTest
         public bool hasKey;
         public float bestPlaytime;
 
+        private string savename => $"{savepath}/save1.sav";
 
         private void Awake()
         {
-            bestPlaytime = 5999.999f;
+            savepath = Application.dataPath;
             instance = Singleton.MakeInstance(this, instance);    
+        }
+
+        private void Start()
+        {
+            bestPlaytime = 5999.999f;
+            LoadGame();
+
+            OnApplicationLoaded?.Invoke();
         }
 
         public void RestartGame()
@@ -71,9 +83,24 @@ namespace PyramidGamesTest
 
         private void SaveGame()
         {
+            var dataToSave = new GameData();
+            dataToSave.bestPlaytime = bestPlaytime;
+            FileManager.WriteSaveFile(dataToSave, savename);
+        }
+
+        private void LoadGame()
+        {
+            var loadedData = FileManager.ReadSaveFile<GameData>(savename);
+            if (loadedData != null)
+                bestPlaytime = loadedData.bestPlaytime;
         }
     }
 
+    [System.Serializable]
+    public class GameData
+    {
+        public float bestPlaytime;
+    }
 
 }
 

@@ -18,6 +18,7 @@ namespace PyramidGamesTest.UI
         public Canvas menuScreen;
         public Canvas gameScreen;
         public Canvas gameoverScreen;
+        public RectTransform loadScreen;
 
         [Header("To Link")]
         public TMP_Text timeIndicator;
@@ -29,11 +30,17 @@ namespace PyramidGamesTest.UI
             instance = Singleton.MakeInstance(this, instance);
         }
 
-
         private void OnEnable()
         {
+            GameManager.OnApplicationLoaded += ShowMainMenu;
             GameManager.OnPlaytimeChanged += RefreshTimer;
             GameManager.OnGameFinished += ShowGameover;
+        }
+
+        private void ShowMainMenu()
+        {
+            loadScreen.gameObject.SetActive(false);
+            ChangeScreen(menuScreen);
         }
 
         private void ShowGameover()
@@ -55,10 +62,6 @@ namespace PyramidGamesTest.UI
             timeIndicator.text = UIHelper.FormatTime(time);
         }
 
-  
-
-
-
         public void ShowMessageWindow(string message)
         {
             var obj = Instantiate(messageWindowPrefab, windowsContainer.transform);
@@ -72,13 +75,9 @@ namespace PyramidGamesTest.UI
 
         private void OnDisable()
         {
+            GameManager.OnApplicationLoaded -= ShowMainMenu;
             GameManager.OnPlaytimeChanged -= RefreshTimer;
+            GameManager.OnGameFinished -= ShowGameover;
         }
-
     }
-
 }
-
-
-
-
