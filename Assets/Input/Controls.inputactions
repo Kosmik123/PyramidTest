@@ -112,6 +112,52 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Interaction Pointer",
+            "id": "638bb284-1634-45ad-831e-586474527341",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "15ebca6c-bb3d-4176-9f0f-07289e35a645",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "33ce4263-b2f2-418c-b515-f553a97f356a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6874cea5-0399-4512-80d3-b201d981fbbc",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c66fc6bc-c07b-4d3d-88c0-845bf5d1affc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

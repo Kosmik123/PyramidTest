@@ -125,6 +125,52 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Interaction Pointer"",
+            ""id"": ""638bb284-1634-45ad-831e-586474527341"",
+            ""actions"": [
+                {
+                    ""name"": ""Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""15ebca6c-bb3d-4176-9f0f-07289e35a645"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""33ce4263-b2f2-418c-b515-f553a97f356a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6874cea5-0399-4512-80d3-b201d981fbbc"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c66fc6bc-c07b-4d3d-88c0-845bf5d1affc"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -133,6 +179,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_RTSCamera = asset.FindActionMap("RTS Camera", throwIfNotFound: true);
         m_RTSCamera_Movement = m_RTSCamera.FindAction("Movement", throwIfNotFound: true);
         m_RTSCamera_Rotation = m_RTSCamera.FindAction("Rotation", throwIfNotFound: true);
+        // Interaction Pointer
+        m_InteractionPointer = asset.FindActionMap("Interaction Pointer", throwIfNotFound: true);
+        m_InteractionPointer_Position = m_InteractionPointer.FindAction("Position", throwIfNotFound: true);
+        m_InteractionPointer_Click = m_InteractionPointer.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -219,9 +269,55 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public RTSCameraActions @RTSCamera => new RTSCameraActions(this);
+
+    // Interaction Pointer
+    private readonly InputActionMap m_InteractionPointer;
+    private IInteractionPointerActions m_InteractionPointerActionsCallbackInterface;
+    private readonly InputAction m_InteractionPointer_Position;
+    private readonly InputAction m_InteractionPointer_Click;
+    public struct InteractionPointerActions
+    {
+        private @Controls m_Wrapper;
+        public InteractionPointerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Position => m_Wrapper.m_InteractionPointer_Position;
+        public InputAction @Click => m_Wrapper.m_InteractionPointer_Click;
+        public InputActionMap Get() { return m_Wrapper.m_InteractionPointer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionPointerActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionPointerActions instance)
+        {
+            if (m_Wrapper.m_InteractionPointerActionsCallbackInterface != null)
+            {
+                @Position.started -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnPosition;
+                @Position.performed -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnPosition;
+                @Position.canceled -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnPosition;
+                @Click.started -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_InteractionPointerActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_InteractionPointerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Position.started += instance.OnPosition;
+                @Position.performed += instance.OnPosition;
+                @Position.canceled += instance.OnPosition;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public InteractionPointerActions @InteractionPointer => new InteractionPointerActions(this);
     public interface IRTSCameraActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
+    }
+    public interface IInteractionPointerActions
+    {
+        void OnPosition(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }
