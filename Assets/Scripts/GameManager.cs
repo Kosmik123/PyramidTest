@@ -19,9 +19,12 @@ namespace PyramidGamesTest
         public bool isCounting;
         public float currentPlaytime;
         public bool hasKey;
+        public float bestPlaytime;
+
 
         private void Awake()
         {
+            bestPlaytime = 5999.999f;
             instance = Singleton.MakeInstance(this, instance);    
         }
 

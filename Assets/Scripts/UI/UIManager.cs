@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace PyramidGamesTest.UI
 {
+
     public class UIManager : MonoBehaviour
     {
         public static UIManager instance;
@@ -51,18 +52,10 @@ namespace PyramidGamesTest.UI
 
         private void RefreshTimer(float time)
         {
-            timeIndicator.text = FormatTime(time);
+            timeIndicator.text = UIHelper.FormatTime(time);
         }
 
-        public static string FormatTime(float time)
-        {
-            int seconds = Mathf.FloorToInt(time);
-            int miliseconds = (int)(1000 * (time - seconds));
-            int minutes = seconds / 60;
-
-            return $"{minutes}:{(seconds%60):D2}.{miliseconds:D3}";
-
-        }
+  
 
 
 
@@ -83,7 +76,6 @@ namespace PyramidGamesTest.UI
         }
 
     }
-
 
 }
 
