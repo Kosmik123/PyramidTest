@@ -7,7 +7,7 @@ namespace PyramidGamesTest.RoomGeneration
         [Header("Settings")]
         public Vector2 size;
 
-        public float GetWallDistance(int wallIndex)
+        public float GetRoomExtent(int wallIndex)
         {
             return 0.5f * (wallIndex % 2 == 0 ? size.y : size.x);
         }

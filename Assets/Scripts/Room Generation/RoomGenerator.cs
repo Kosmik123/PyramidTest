@@ -28,14 +28,14 @@ namespace PyramidGamesTest.RoomGeneration
             ResizeFloor();
 
             // decide door positions
-            var doorPositions = doorGenerator.GetRandomWallPositions(doorGenerator.doorsCount);
+            var doorPositions = doorGenerator.GetRandomWallPositions(doorGenerator.objectsCount);
 
             // intantiate doors
-            doorGenerator.InstantiateDoors(doorPositions);
+            doorGenerator.InstantiateObjects(doorPositions);
 
 
             // fill ther rest with walls
-            GenerateWalls(doorPositions, doorGenerator.doorSize);
+            GenerateWalls(doorPositions, doorGenerator.objectsWidth);
 
             // tile wall textures correctly
 
@@ -52,7 +52,7 @@ namespace PyramidGamesTest.RoomGeneration
         {
             for (int i = 0; i < 4; i++)
             {
-                float wallDist = room.GetWallDistance(i);
+                float wallDist = room.GetRoomExtent(i);
             }
             GameObject.CreatePrimitive(PrimitiveType.Quad);
         }

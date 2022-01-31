@@ -107,10 +107,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 3710796625385637409}
-  doorPrefab: {fileID: 1570266275981612153, guid: 0d24b6cf34aa64b42870af2deee4ad26,
+  intantiatedObjectPrefab: {fileID: 1570266275981612153, guid: 0d24b6cf34aa64b42870af2deee4ad26,
     type: 3}
-  doorsCount: 2
-  doorSize: 0.6
+  objectsCount: 2
+  objectsWidth: 0.6
+  objectName: Door
 --- !u!1001 &4633836159565856136
 PrefabInstance:
   m_ObjectHideFlags: 0
