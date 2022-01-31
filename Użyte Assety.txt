@@ -2,4 +2,4 @@ Model drzwi: https://assetstore.unity.com/packages/3d/props/metal-door-5397
 
 Model skrzyni: https://assetstore.unity.com/packages/3d/props/furniture/reinforced-wooden-chest-68139 
 
-
+Model klucza: https://assetstore.unity.com/packages/3d/props/rust-key-167590
