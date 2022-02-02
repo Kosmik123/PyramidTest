@@ -4,16 +4,19 @@ using UnityEngine;
 
 namespace PyramidGamesTest.Interactions
 {
-    public class Key : MonoBehaviour
+    public class Key : InteractableObject
     {
         public void PickUp()
         {
-            GameManager.instance.hasKey = true;
+            GiveChoice("Take?", Take);
         }
 
-        public void DestroyObject()
+        public void Take()
         {
-            Destroy(gameObject);
+            GameManager.instance.hasKey = true;
+            GetComponent<Animator>().SetTrigger("Disappear");
         }
+
+
     }
 }
