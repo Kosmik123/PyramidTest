@@ -20,10 +20,13 @@ namespace PyramidGamesTest
 
         [Header("States")]        
         public bool isCounting;
-        public float currentPlaytime;
-        public bool hasKey;
-        public float bestPlaytime;
 
+        public float currentPlaytime;
+        public float bestPlaytime;
+        public float previousBestTime;
+
+        public bool hasKey;
+        
         private string savename => $"{savepath}/save1.sav";
 
         private void Awake()
@@ -34,7 +37,7 @@ namespace PyramidGamesTest
 
         private void Start()
         {
-            bestPlaytime = 5999.999f;
+            bestPlaytime = previousBestTime = 5999.999f;
             LoadGame();
 
             OnApplicationLoaded?.Invoke();
@@ -66,6 +69,10 @@ namespace PyramidGamesTest
         public void Finish()
         {
             isCounting = false;
+            previousBestTime = bestPlaytime;
+            if (currentPlaytime < bestPlaytime)
+                bestPlaytime = currentPlaytime;
+            
             OnGameFinished?.Invoke();
         }
 

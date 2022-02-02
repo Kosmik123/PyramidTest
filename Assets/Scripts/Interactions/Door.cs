@@ -9,6 +9,8 @@ namespace PyramidGamesTest.Interactions
         [Header("Settings")]
         [SerializeField]
         private string cantOpenText;
+        [SerializeField]
+        private string openQuestion;
 
         [Header("States")]
         public bool isOpen;
@@ -19,7 +21,7 @@ namespace PyramidGamesTest.Interactions
                 return;
 
             if (GameManager.instance.hasKey)
-                OpenSuccessfully();
+                GiveChoice(openQuestion, OpenSuccessfully);
             else
                 ShowMessage(cantOpenText);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace PyramidGamesTest.UI
@@ -24,6 +25,7 @@ namespace PyramidGamesTest.UI
         public TMP_Text timeIndicator;
         public Canvas windowsContainer;
         public Image windowsContainerPanel;
+
 
         private void Awake()
         {
@@ -69,8 +71,14 @@ namespace PyramidGamesTest.UI
             window.Message = message;
         }
 
-        public void RefreshWindowsContainer()
+        public void ShowChoiceWindow(string message, UnityAction yesAction, UnityAction noAction = null)
         {
+            var obj = Instantiate(yesNoWindowPrefab, windowsContainer.transform);
+            var window = obj.GetComponent<YesNoWindow>();
+            window.Message = message;
+            window.SetYesAction(yesAction);
+            if (noAction != null)
+                window.SetNoAction(noAction);
         }
 
         private void OnDisable()

@@ -14,6 +14,10 @@ namespace PyramidGamesTest.Interactions
             UI.UIManager.instance.ShowMessageWindow(message);
         }
 
+        public void GiveChoice(string question, UnityAction yesAction, UnityAction noAction = null)
+        {
+            UI.UIManager.instance.ShowChoiceWindow(question, yesAction, noAction);
+        }
 
 
     }

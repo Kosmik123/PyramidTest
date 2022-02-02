@@ -26,6 +26,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantOpenText: You need a key!
+  openQuestion: Open?
+  isOpen: 0
 --- !u!1001 &832676626803344538
 PrefabInstance:
   m_ObjectHideFlags: 0
