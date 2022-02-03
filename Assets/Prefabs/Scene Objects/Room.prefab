@@ -95,7 +95,7 @@ MonoBehaviour:
   structureType: 1
   wallHeight: 2
   wallThicknes: 0.1
-  wallMaterial: {fileID: 0}
+  wallMaterial: {fileID: 2100000, guid: e6db1190b09f2724aa3ff922bc6a7745, type: 2}
 --- !u!1 &5025983261556187548
 GameObject:
   m_ObjectHideFlags: 0

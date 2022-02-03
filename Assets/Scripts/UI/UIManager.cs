@@ -26,6 +26,7 @@ namespace PyramidGamesTest.UI
         public Canvas windowsContainer;
         public Image windowsContainerPanel;
 
+        private Canvas currentScreen;
 
         private void Awake()
         {
@@ -37,6 +38,13 @@ namespace PyramidGamesTest.UI
             GameManager.OnApplicationLoaded += ShowMainMenu;
             GameManager.OnPlaytimeChanged += RefreshTimer;
             GameManager.OnGameFinished += ShowGameover;
+        }
+
+        private void Start()
+        {
+            if(currentScreen == null)
+                loadScreen.gameObject.SetActive(true);
+
         }
 
         private void ShowMainMenu()
@@ -56,6 +64,7 @@ namespace PyramidGamesTest.UI
             gameScreen.gameObject.SetActive(false);
             gameoverScreen.gameObject.SetActive(false);
 
+            currentScreen = newScreen;
             newScreen.gameObject.SetActive(true);
         }
 

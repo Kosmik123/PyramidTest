@@ -76,9 +76,13 @@ namespace PyramidGamesTest.RoomGeneration
 
             var wall = InstantiateWallModule();
             wall.name = "Wall";
-            wall.localPosition = wallProperties.centerPosition + 0.5f * wallHeight * Vector3.up;
-            wall.localRotation = wallProperties.rotation;
-            wall.localScale = new Vector3(wallProperties.width, wallHeight, wallThicknes);
+            var wallRenderer = wall.GetComponent<MeshRenderer>();
+            
+            var pos = wallProperties.centerPosition + 0.5f * wallHeight * Vector3.up;
+            SetPosision(wallRenderer, pos);
+
+            wall.localRotation = wallProperties.rotation;   
+            SetScale(wallRenderer, wallProperties.width, wallHeight, wallThicknes);
         }
 
         private WallProperties GetWallProperties(int wallIndex)
@@ -113,20 +117,40 @@ namespace PyramidGamesTest.RoomGeneration
             float topY = 0.5f * (wallHeight + holeHeight);
             var module = InstantiateWallModule();
             module.name = "Wall Module";
-            module.localPosition = properties.centerPosition + topY * Vector3.up;
+            var moduleRenderer = module.GetComponent<MeshRenderer>();
+            
+            var pos = properties.centerPosition + topY * Vector3.up;
+            SetPosision(moduleRenderer, pos);
+
             module.localRotation = properties.rotation;
-            module.localScale = new Vector3(properties.width, wallHeight - holeHeight, wallThicknes);
+            SetScale(moduleRenderer, properties.width, wallHeight - holeHeight, wallThicknes);
+        }
+
+        private void SetPosision(MeshRenderer module, Vector3 position)
+        {
+            module.transform.localPosition = position;
+            module.material.SetVector("_Offset", new Vector4(position.x, position.y));
+        }
+
+        private void SetScale(MeshRenderer renderer, float width, float height, float thickness)
+        {
+            renderer.transform.localScale = new Vector3(width, height, thickness);
+            renderer.material.SetVector("_Tiling", new Vector4(width, height));
         }
 
         private void CreateBottomModule(WallProperties properties, float distanceFromCenter, float width, float holeHeight)
         {
             var module = InstantiateWallModule();
             module.name = "Wall Module";
-            module.localPosition = properties.centerPosition
+            var moduleRenderer = module.GetComponent<MeshRenderer>();
+
+            var pos = properties.centerPosition
                 + 0.5f * holeHeight * Vector3.up
                 + properties.rotation * Vector3.right * distanceFromCenter;
+            SetPosision(moduleRenderer, pos);
+            
             module.localRotation = properties.rotation;
-            module.localScale = new Vector3(width, holeHeight, wallThicknes);
+            SetScale(moduleRenderer, width, holeHeight, wallThicknes);
         }
 
         private Transform InstantiateWallModule()
@@ -135,7 +159,7 @@ namespace PyramidGamesTest.RoomGeneration
             var obj = GameObject.CreatePrimitive(type);
             obj.transform.parent = transform;
 
-            // obj.GetComponent<MeshRenderer>().material = wallMaterial;
+            obj.GetComponent<MeshRenderer>().material = wallMaterial;
 
             return obj.transform;
         }
